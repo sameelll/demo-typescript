@@ -1,5 +1,6 @@
 // Imports 
 import { invoice } from "./classes/invoice.js";
+import { listTemplate } from "./classes/listTemplate.js";
 import { payment } from "./classes/payment.js"
 import { HasFormatter } from "./interfaces/HasFormatter.js" 
 
@@ -23,6 +24,10 @@ const tofrom = document.querySelector('#tofrom') as HTMLInputElement;
 const details = document.querySelector('#details') as HTMLInputElement;
 const amount = document.querySelector('#amount') as HTMLInputElement;
 
+// list template instance 
+const ul = document.querySelector('ul')!;
+const list = new listTemplate(ul)
+
 // Adding functionality to the form
 form.addEventListener('submit', (e: Event) => {
     e.preventDefault();
@@ -35,5 +40,5 @@ form.addEventListener('submit', (e: Event) => {
         doc = new payment(tofrom.value, details.value, amount.valueAsNumber)
     }
 
-    console.log(doc);
+    list.render(doc, type.value, 'end');
 })
