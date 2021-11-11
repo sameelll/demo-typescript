@@ -22,4 +22,4 @@ export class listTemplate {
             this.container.append(li);
         }
     }
-}
+};

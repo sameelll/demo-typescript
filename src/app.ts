@@ -4,17 +4,6 @@ import { listTemplate } from "./classes/listTemplate.js";
 import { payment } from "./classes/payment.js"
 import { HasFormatter } from "./interfaces/HasFormatter.js" 
 
-let docOne: HasFormatter;
-let docTwo: HasFormatter;
-
-docOne = new invoice('yoshi', 'web work', 250);
-docTwo = new payment('mario', 'plumbing work', 200);
-
-let docs: HasFormatter[] = [];
-
-docs.push(docOne);
-docs.push(docTwo);
-
 // Getting form element
 const form = document.querySelector('.new-item-form') as HTMLFormElement;
 
@@ -34,7 +23,7 @@ form.addEventListener('submit', (e: Event) => {
 
     let values: [string, string, number];
     values = [tofrom.value, details.value, amount.valueAsNumber]
-    
+
     let doc: HasFormatter;
 
     if(type.value === 'invoice'){
@@ -44,4 +33,4 @@ form.addEventListener('submit', (e: Event) => {
     }
 
     list.render(doc, type.value, 'end');
-})
+});
