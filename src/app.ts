@@ -1,17 +1,18 @@
-import {invoice} from "./classes/invoice.js";
+// Imports 
+import { invoice } from "./classes/invoice.js";
+import { payment } from "./classes/payment.js"
+import { HasFormatter } from "./interfaces/HasFormatter.js" 
 
-const invOne = new invoice('mario', 'work on the mario website', 250);
-const invTwo = new invoice('luigi', 'work on the mario website', 300);
+let docOne: HasFormatter;
+let docTwo: HasFormatter;
 
-let invoices: invoice[] = [];
+docOne = new invoice('yoshi', 'web work', 250);
+docTwo = new payment('mario', 'plumbing work', 200);
 
-invoices.push(invOne);
-invoices.push(invTwo)
+let docs: HasFormatter[] = [];
 
-// looping 
-invoices.forEach(inv => {
-    console.log(inv.client, inv.amount, inv.format());
-});
+docs.push(docOne);
+docs.push(docTwo);
 
 // Getting form element
 const form = document.querySelector('.new-item-form') as HTMLFormElement;
@@ -26,10 +27,13 @@ const amount = document.querySelector('#amount') as HTMLInputElement;
 form.addEventListener('submit', (e: Event) => {
     e.preventDefault();
 
-    console.log(
-        type.value,
-        tofrom.value,
-        details.value,
-        amount.valueAsNumber
-    );
+    let doc: HasFormatter;
+
+    if(type.value === 'invoice'){
+        doc = new invoice(tofrom.value, details.value, amount.valueAsNumber)
+    } else {
+        doc = new payment(tofrom.value, details.value, amount.valueAsNumber)
+    }
+
+    console.log(doc);
 })
